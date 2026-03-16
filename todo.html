@@ -64,7 +64,11 @@
         <input type="text" id="taskInput" placeholder="Add a new task...">
         <button onclick="addTask()">Add</button>
     </div>
-
+   
+    <div class="input-group">
+       <input type="text" id="searchInput" placeholder="Search tasks..." onkeyup="searchTasks()">
+    </div>
+   
     <div class="task-buttons">
         <button onclick="markAllCompleted()">Mark All Completed</button>
         <button onclick="clearCompleted()">Clear Completed</button>
@@ -125,6 +129,19 @@
             if(type === 'completed' && !task.classList.contains('completed')) task.style.display='none';
         });
     }
+   function searchTasks() {
+    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const tasks = document.querySelectorAll('#taskList li');
+
+    tasks.forEach(task => {
+        const text = task.firstChild.textContent.toLowerCase(); // ignore Delete button text
+        if(text.includes(searchValue)) {
+            task.style.display = 'flex';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+}
 </script>
 </body>
 </html>
